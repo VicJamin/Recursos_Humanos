@@ -13,6 +13,7 @@ import com.example.rrhh.ui.componentes.BotonMenu
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PantallaPrincipal(
+    onCerrarSesion: () -> Unit,
     onEmpleados: () -> Unit,
     /*
 */    onPermisos: () -> Unit
@@ -80,7 +81,7 @@ fun PantallaPrincipal(
 
             BotonMenu(
                 texto = "Cerrar Sesión",
-                onClick = onPermisos
+                onClick = onCerrarSesion
             )
 
 

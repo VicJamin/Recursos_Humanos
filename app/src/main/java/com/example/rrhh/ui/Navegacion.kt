@@ -4,6 +4,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -13,18 +14,78 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.rrhh.AlcaldiaApplication
+import com.example.rrhh.util.SesionManager
 import com.example.rrhh.viewmodel.EmpleadoViewModel
 import com.example.rrhh.viewmodel.PermisoViewModel
+import com.example.rrhh.viewmodel.UsuarioViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Navegacion(
     navController: NavHostController = rememberNavController()
 ) {
+    val contexto = LocalContext.current
+    val sesionManager = remember { SesionManager(contexto) }
+    val tieneSesion = remember { sesionManager.sesionActiva() }
+
+    val rutaInicial = if (tieneSesion) "principal" else "login"
+
     NavHost(
         navController = navController,
-        startDestination = "principal"
+        startDestination = rutaInicial
     ) {
+        // --- LOGIN ---
+        composable("login") {
+            val app = LocalContext.current.applicationContext as AlcaldiaApplication
+            val viewModel: UsuarioViewModel = viewModel(
+                factory = object : ViewModelProvider.Factory {
+                    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                        return UsuarioViewModel(app) as T
+                    }
+                }
+            )
+
+            PantallaLogin(
+                viewModel = viewModel,
+                onLoginExitoso = {
+                    navController.navigate("principal") {
+                        popUpTo("login") {
+                            inclusive = true
+                        }
+                    }
+                },
+                onCrearCuenta = {
+                    navController.navigate("registro")
+                }
+            )
+        }
+
+        // --- REGISTRO ---
+        composable("registro") {
+            val app = LocalContext.current.applicationContext as AlcaldiaApplication
+            val viewModel: UsuarioViewModel = viewModel(
+                factory = object : ViewModelProvider.Factory {
+                    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                        return UsuarioViewModel(app) as T
+                    }
+                }
+            )
+
+            PantallaRegistro(
+                viewModel = viewModel,
+                onRegistroExitoso = {
+                    navController.navigate("login") {
+                        popUpTo("registro") {
+                            inclusive = true
+                        }
+                    }
+                },
+                onRegresar = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
         // --- PANTALLA PRINCIPAL (MENÚ INICIAL BARL SYSTEM) ---
         composable("principal") {
             PantallaPrincipal(
@@ -33,6 +94,14 @@ fun Navegacion(
                 },
                 onPermisos = {
                     navController.navigate("permisosRegistrados")
+                },
+                onCerrarSesion = {
+                    sesionManager.cerrarSesion()
+                    navController.navigate("login") {
+                        popUpTo("principal") {
+                            inclusive = true
+                        }
+                    }
                 }
             )
         }

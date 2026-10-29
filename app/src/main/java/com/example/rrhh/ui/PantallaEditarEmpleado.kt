@@ -44,6 +44,7 @@ fun PantallaEditarEmpleado(
                                 tint = Color.White
                             )
                         }
+
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = Color(0xFF142B4A),
@@ -66,7 +67,16 @@ fun PantallaEditarEmpleado(
                     value = nombre,
                     onValueChange = { nombre = it },
                     label = { Text("Nombre Completo") },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color(0xFF142B4A),
+                        unfocusedBorderColor = Color.Gray,
+                        cursorColor = Color.Gray,
+                        focusedLabelColor = Color(0xFF142B4A),
+                        unfocusedLabelColor = Color.Gray,
+                        focusedTextColor = Color.Black,
+                        unfocusedTextColor = Color.Gray
+                    )
                 )
 
                 Text("Cambiar Area (Reasignacion):")
@@ -101,7 +111,16 @@ fun PantallaEditarEmpleado(
                     value = puesto,
                     onValueChange = { puesto = it },
                     label = { Text("Puesto Especifico") },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color(0xFF142B4A),
+                        unfocusedBorderColor = Color.Gray,
+                        cursorColor = Color.Gray,
+                        focusedLabelColor = Color(0xFF142B4A),
+                        unfocusedLabelColor = Color.Gray,
+                        focusedTextColor = Color.Black,
+                        unfocusedTextColor = Color.Gray
+                    )
                 )
 
                 Card(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)) {

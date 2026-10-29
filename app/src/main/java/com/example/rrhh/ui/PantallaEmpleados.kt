@@ -47,9 +47,12 @@ fun PantallaEmpleados(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = onNavegarAAgregar) {
+            FloatingActionButton(onClick = onNavegarAAgregar,
+                containerColor = Color(0xFF142B4A),
+                contentColor = Color.White) {
                 Text("+")
             }
+
         }
 
     ) { padding ->

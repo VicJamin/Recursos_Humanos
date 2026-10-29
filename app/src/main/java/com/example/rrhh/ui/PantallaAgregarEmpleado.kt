@@ -69,14 +69,32 @@ fun PantallaAgregarEmpleado(
                 value = id,
                 onValueChange = { id = it },
                 label = { Text("ID Empleado (ej: EMP-001)") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color(0xFF142B4A),
+                    unfocusedBorderColor = Color.Gray,
+                    cursorColor = Color.Gray,
+                    focusedLabelColor = Color(0xFF142B4A),
+                    unfocusedLabelColor = Color.Gray,
+                    focusedTextColor = Color.Black,
+                    unfocusedTextColor = Color.Gray
+                )
             )
 
             OutlinedTextField(
                 value = nombre,
                 onValueChange = { nombre = it },
                 label = { Text("Nombre Completo") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color(0xFF142B4A),
+                    unfocusedBorderColor = Color.Gray,
+                    cursorColor = Color.Gray,
+                    focusedLabelColor = Color(0xFF142B4A),
+                    unfocusedLabelColor = Color.Gray,
+                    focusedTextColor = Color.Black,
+                    unfocusedTextColor = Color.Gray
+                )
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text("Area Asignada:", color = Color.Black)
@@ -113,7 +131,16 @@ fun PantallaAgregarEmpleado(
                 value = puesto,
                 onValueChange = { puesto = it },
                 label = { Text("Puesto Especifico") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color(0xFF142B4A),
+                    unfocusedBorderColor = Color.Gray,
+                    cursorColor = Color.Gray,
+                    focusedLabelColor = Color(0xFF142B4A),
+                    unfocusedLabelColor = Color.Gray,
+                    focusedTextColor = Color.Black,
+                    unfocusedTextColor = Color.Gray
+                )
             )
 
             Button(
@@ -133,7 +160,11 @@ fun PantallaAgregarEmpleado(
                         onVolver()
                     }
                 },
-                modifier = Modifier.fillMaxWidth().padding(top = 16.dp)
+                modifier = Modifier.fillMaxWidth().padding(top = 250.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF3B82F6),
+                    contentColor = Color.Black
+                )
             ) {
                 Text("Guardar Empleado")
             }

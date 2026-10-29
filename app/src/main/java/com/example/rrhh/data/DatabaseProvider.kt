@@ -1,12 +1,7 @@
 package com.example.rrhh.data
 
-
 import android.content.Context
-import androidx.room.Database
 import androidx.room.Room
-import androidx.room.RoomDatabase
-import com.example.rrhh.model.Empleado
-import com.example.rrhh.model.Permiso
 
 object DatabaseProvider {
     @Volatile
@@ -18,7 +13,9 @@ object DatabaseProvider {
                 context.applicationContext,
                 AlcaldiaDatabase::class.java,
                 "alcaldia_rrhh_db"
-            ).build()
+            )
+            .fallbackToDestructiveMigration(true)
+            .build()
             INSTANCE = instance
             instance
         }
