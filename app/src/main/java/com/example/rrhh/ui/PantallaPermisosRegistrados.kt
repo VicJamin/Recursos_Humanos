@@ -48,11 +48,10 @@ fun PantallaPermisosRegistrados(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = onNavegarARegistrar) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = "Registrar Permiso"
-                )
+            FloatingActionButton(onClick = onNavegarARegistrar,
+                containerColor = Color(0xFF142B4A),
+                contentColor = Color.White) {
+                Text("+")
             }
         }
     ) { padding ->

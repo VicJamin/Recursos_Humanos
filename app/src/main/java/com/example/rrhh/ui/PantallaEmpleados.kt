@@ -67,6 +67,8 @@ fun PantallaEmpleados(
                         selected = areaActual == area,
                         onClick = { viewModel.cambiarArea(area) },
                         text = { Text(area, color = Color.Black) },
+                        selectedContentColor = Color(0xFF142B4A),
+                        unselectedContentColor = Color.Gray
 
                     )
                 }
