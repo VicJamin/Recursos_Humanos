@@ -109,7 +109,16 @@ fun PantallaAgregarEmpleado(
                     onValueChange = {},
                     readOnly = true,
                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedArea) },
-                    modifier = Modifier.menuAnchor().fillMaxWidth()
+                    modifier = Modifier.menuAnchor().fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color(0xFF142B4A),
+                        unfocusedBorderColor = Color.Gray,
+                        cursorColor = Color.Gray,
+                        focusedLabelColor = Color(0xFF142B4A),
+                        unfocusedLabelColor = Color.Gray,
+                        focusedTextColor = Color.Black,
+                        unfocusedTextColor = Color.Gray
+                    )
                 )
                 ExposedDropdownMenu(
                     expanded = expandedArea,
@@ -160,7 +169,7 @@ fun PantallaAgregarEmpleado(
                         onVolver()
                     }
                 },
-                modifier = Modifier.fillMaxWidth().padding(top = 250.dp),
+                modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFF3B82F6),
                     contentColor = Color.Black

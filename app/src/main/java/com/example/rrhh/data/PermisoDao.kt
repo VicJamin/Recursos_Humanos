@@ -11,9 +11,6 @@ interface PermisoDao {
     @Query("SELECT * FROM permisos ORDER BY idPermiso DESC")
     fun obtenerTodos(): Flow<List<Permiso>>
 
-    @Query("SELECT * FROM permisos WHERE idEmpleado = :idEmpleado ORDER BY idPermiso DESC")
-    fun obtenerPorEmpleado(idEmpleado: String): Flow<List<Permiso>>
-
     @Insert
     suspend fun insertar(permiso: Permiso)
 }

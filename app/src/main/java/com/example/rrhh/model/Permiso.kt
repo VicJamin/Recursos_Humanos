@@ -1,12 +1,6 @@
 package com.example.rrhh.model
-
-
-
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
-
-
 @Entity(tableName = "permisos")
 data class Permiso(
     @PrimaryKey(autoGenerate = true) val idPermiso: Int = 0,
@@ -16,3 +10,5 @@ data class Permiso(
     val motivo: String,
     val fecha: String
 )
+
+

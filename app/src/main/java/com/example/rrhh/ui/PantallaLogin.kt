@@ -136,7 +136,7 @@ fun PantallaLogin(
             Text(text = "Iniciar sesión")
         }
 
-        Spacer(modifier = Modifier.height(275.dp))
+
 
         TextButton(
             onClick = onCrearCuenta,

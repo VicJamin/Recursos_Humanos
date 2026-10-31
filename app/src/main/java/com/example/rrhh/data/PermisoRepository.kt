@@ -10,6 +10,7 @@ class PermisoRepository(
     fun obtenerPermisos(): Flow<List<Permiso>> = permisoDao.obtenerTodos()
 
     suspend fun registrarPermiso(permiso: Permiso): Boolean {
+
         val empleado = empleadoDao.obtenerPorId(permiso.idEmpleado) ?: return false
 
         if (permiso.tipoPermiso == "CON_GOCE") {

@@ -23,12 +23,15 @@ fun PantallaPermiso(
     var horasStr by remember { mutableStateOf("") }
     var motivo by remember { mutableStateOf("") }
     var esConGoce by remember { mutableStateOf(true) }
+    var fecha by remember { mutableStateOf("") }
 
     val context = LocalContext.current
 
     Scaffold(
+        containerColor = Color(0xFFF4F6F9),
         topBar = {
             TopAppBar(
+
                 title = { Text("Registrar Permiso Personal") },
                 navigationIcon = {
                     IconButton(onClick = onVolver) {
@@ -60,17 +63,29 @@ fun PantallaPermiso(
                 value = idEmpleado,
                 onValueChange = { idEmpleado = it },
                 label = { Text("ID del Empleado") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color(0xFF142B4A),
+                    unfocusedBorderColor = Color.Gray,
+                    cursorColor = Color.Gray,
+                    focusedLabelColor = Color(0xFF142B4A),
+                    unfocusedLabelColor = Color.Gray,
+                    focusedTextColor = Color.Black,
+                    unfocusedTextColor = Color.Gray
+                )
             )
 
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Row {
                     RadioButton(selected = esConGoce, onClick = { esConGoce = true })
-                    Text("Con Goce (40h)", modifier = Modifier.padding(top = 12.dp))
+                    Text("Con Goce (40h)", modifier = Modifier.padding(top = 12.dp),
+                        color = Color.Black
+                    )
                 }
                 Row {
                     RadioButton(selected = !esConGoce, onClick = { esConGoce = false })
-                    Text("Sin Goce (480h)", modifier = Modifier.padding(top = 12.dp))
+                    Text("Sin Goce (480h)", modifier = Modifier.padding(top = 12.dp),
+                        color = Color.Black)
                 }
             }
 
@@ -78,28 +93,65 @@ fun PantallaPermiso(
                 value = horasStr,
                 onValueChange = { horasStr = it },
                 label = { Text("Cantidad de Horas") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color(0xFF142B4A),
+                    unfocusedBorderColor = Color.Gray,
+                    cursorColor = Color.Gray,
+                    focusedLabelColor = Color(0xFF142B4A),
+                    unfocusedLabelColor = Color.Gray,
+                    focusedTextColor = Color.Black,
+                    unfocusedTextColor = Color.Gray
+                )
             )
 
             OutlinedTextField(
                 value = motivo,
                 onValueChange = { motivo = it },
                 label = { Text("Motivo") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color(0xFF142B4A),
+                    unfocusedBorderColor = Color.Gray,
+                    cursorColor = Color.Gray,
+                    focusedLabelColor = Color(0xFF142B4A),
+                    unfocusedLabelColor = Color.Gray,
+                    focusedTextColor = Color.Black,
+                    unfocusedTextColor = Color.Gray
+                )
+            )
+
+
+            OutlinedTextField(
+                value = fecha,
+                onValueChange = { fecha = it },
+                label = { Text("Fecha (YYYY-MM-DD)") },
+                placeholder = { Text("Ej. 2026-10-29") },
+                modifier = Modifier.fillMaxWidth(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color(0xFF142B4A),
+                    unfocusedBorderColor = Color.Gray,
+                    cursorColor = Color.Gray,
+                    focusedLabelColor = Color(0xFF142B4A),
+                    unfocusedLabelColor = Color.Gray,
+                    focusedTextColor = Color.Black,
+                    unfocusedTextColor = Color.Gray
+                )
             )
 
             Button(
                 onClick = {
                     val horas = horasStr.toIntOrNull() ?: 0
-                    if (idEmpleado.isBlank() || horas <= 0) {
-                        Toast.makeText(context, "Ingresa un ID y horas validas", Toast.LENGTH_SHORT).show()
+
+                    if (idEmpleado.isBlank() || horas <= 0 || fecha.isBlank()) {
+                        Toast.makeText(context, "Por favor completa todos los campos correctamente", Toast.LENGTH_SHORT).show()
                     } else {
                         val permiso = Permiso(
                             idEmpleado = idEmpleado,
                             tipoPermiso = if (esConGoce) "CON_GOCE" else "SIN_GOCE",
                             horasSolicitadas = horas,
                             motivo = motivo,
-                            fecha = "2026-10-03"
+                            fecha = fecha
                         )
                         viewModel.registrarPermiso(permiso) { exito ->
                             if (exito) {
@@ -111,9 +163,10 @@ fun PantallaPermiso(
                         }
                     }
                 },
-                modifier = Modifier.fillMaxWidth().padding(top = 16.dp)
+                modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF142B4A))
             ) {
-                Text("Procesar Permiso")
+                Text("Procesar Permiso", color = Color.White)
             }
         }
     }

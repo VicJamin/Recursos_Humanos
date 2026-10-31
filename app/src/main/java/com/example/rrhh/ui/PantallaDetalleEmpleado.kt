@@ -97,7 +97,10 @@ fun PantallaDetalleEmpleado(
             // Tarjeta de Información General
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(0xFF142B4A),
+                )
             ) {
                 Column(
                     modifier = Modifier.padding(16.dp),
@@ -107,12 +110,12 @@ fun PantallaDetalleEmpleado(
                         text = empleado.nombreCompleto,
                         fontSize = 22.sp,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary
+                        color = Color.White
                     )
                     Text(
                         text = "ID Código: ${empleado.idEmpleado}",
                         fontSize = 14.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = Color.White
                     )
 
                     HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
@@ -120,11 +123,13 @@ fun PantallaDetalleEmpleado(
                     Text(
                         text = "Área Asignada: ${empleado.area}",
                         fontSize = 16.sp,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Medium,
+                        color = Color.White
                     )
                     Text(
                         text = "Puesto / Cargo: ${empleado.puesto}",
-                        fontSize = 15.sp
+                        fontSize = 15.sp,
+                        color = Color.White
                     )
                 }
             }
@@ -133,7 +138,7 @@ fun PantallaDetalleEmpleado(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant
+                    containerColor = Color(0xFF142B4A),
                 )
             ) {
                 Column(
@@ -143,7 +148,8 @@ fun PantallaDetalleEmpleado(
                     Text(
                         text = "Balance de Horas para Permisos",
                         fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
                     )
 
                     Spacer(modifier = Modifier.height(4.dp))
@@ -153,11 +159,11 @@ fun PantallaDetalleEmpleado(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text("Con Goce de Sueldo:")
+                        Text("Con Goce de Sueldo:", color = Color.White)
                         Text(
                             text = "${empleado.horasConGoceDisp} / 40 hrs",
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.primary
+                            color = Color.Red
                         )
                     }
 
@@ -166,11 +172,11 @@ fun PantallaDetalleEmpleado(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text("Sin Goce de Sueldo:")
+                        Text("Sin Goce de Sueldo:", color = Color.White)
                         Text(
                             text = "${empleado.horasSinGoceDisp} / 480 hrs",
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.secondary
+                            color = Color.Green
                         )
                     }
                 }
@@ -181,15 +187,22 @@ fun PantallaDetalleEmpleado(
             // Botón de Reasignación de Área Directo
             Button(
                 onClick = { onEditar(empleado.idEmpleado) },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF3B82F6),
+                    contentColor = Color.Black
+                )
             ) {
                 Icon(
                     imageVector = Icons.Default.Edit,
                     contentDescription = null,
-                    modifier = Modifier.size(18.dp)
+                    modifier = Modifier.size(18.dp),
+                    tint = Color.Black
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text("Editar Expediente o Trasladar de Área")
+
+
             }
         }
     }
@@ -207,7 +220,7 @@ fun PantallaDetalleEmpleado(
                         onEliminar(empleado)
                     }
                 ) {
-                    Text("Eliminar", color = MaterialTheme.colorScheme.error)
+                    Text("Eliminar", color = Color.Red)
                 }
             },
             dismissButton = {

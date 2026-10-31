@@ -19,23 +19,23 @@ fun PantallaEditarEmpleado(
     viewModel: EmpleadoViewModel,
     onVolver: () -> Unit
 ) {
-    val listaEmpleados by viewModel.empleados.collectAsState(initial = emptyList())
-    val empleado = listaEmpleados.find { it.idEmpleado == idEmpleado }
+    val empleado by viewModel.obtenerEmpleadoPorIdFlow(idEmpleado).collectAsState(initial = null)
 
     val context = LocalContext.current
     val areas = listOf("Servicios Generales", "Agentes del CAM", "Administracion", "Catastro")
 
     if (empleado != null) {
-        var nombre by remember { mutableStateOf(empleado.nombreCompleto) }
-        var puesto by remember { mutableStateOf(empleado.puesto) }
-        var areaSeleccionada by remember { mutableStateOf(empleado.area) }
+        val emp = empleado!!
+        var nombre by remember { mutableStateOf(emp.nombreCompleto) }
+        var puesto by remember { mutableStateOf(emp.puesto) }
+        var areaSeleccionada by remember { mutableStateOf(emp.area) }
         var expandedArea by remember { mutableStateOf(false) }
 
         Scaffold(
             containerColor = Color(0xFFF4F6F9),
             topBar = {
                 TopAppBar(
-                    title = { Text("Editar Expediente: ${empleado.idEmpleado}") },
+                    title = { Text("Editar Expediente: ${emp.idEmpleado}") },
                     navigationIcon = {
                         IconButton(onClick = onVolver) {
                             Icon(
@@ -44,17 +44,13 @@ fun PantallaEditarEmpleado(
                                 tint = Color.White
                             )
                         }
-
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = Color(0xFF142B4A),
                         titleContentColor = Color.White
-
                     )
                 )
             }
-
-
         ) { padding ->
             Column(
                 modifier = Modifier
@@ -89,7 +85,16 @@ fun PantallaEditarEmpleado(
                         onValueChange = {},
                         readOnly = true,
                         trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedArea) },
-                        modifier = Modifier.menuAnchor().fillMaxWidth()
+                        modifier = Modifier.menuAnchor().fillMaxWidth(),
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = Color(0xFF142B4A),
+                            unfocusedBorderColor = Color.Gray,
+                            cursorColor = Color.Gray,
+                            focusedLabelColor = Color(0xFF142B4A),
+                            unfocusedLabelColor = Color.Gray,
+                            focusedTextColor = Color.Black,
+                            unfocusedTextColor = Color.Gray
+                        )
                     )
                     ExposedDropdownMenu(
                         expanded = expandedArea,
@@ -123,17 +128,23 @@ fun PantallaEditarEmpleado(
                     )
                 )
 
-                Card(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
+                Card(
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = Color(0xFF142B4A),
+                        contentColor = Color.White
+                    )
+                ) {
                     Column(modifier = Modifier.padding(12.dp)) {
-                        Text("Saldo de Horas Disponible:", style = MaterialTheme.typography.titleMedium)
-                        Text("• Con Goce de Sueldo: ${empleado.horasConGoceDisp} / 40 hrs")
-                        Text("• Sin Goce de Sueldo: ${empleado.horasSinGoceDisp} / 480 hrs")
+                        Text("Saldo de Horas Disponible:")
+                        Text("• Con Goce de Sueldo: ${emp.horasConGoceDisp} / 40 hrs")
+                        Text("• Sin Goce de Sueldo: ${emp.horasSinGoceDisp} / 480 hrs")
                     }
                 }
 
                 Button(
                     onClick = {
-                        val empActualizado = empleado.copy(
+                        val empActualizado = emp.copy(
                             nombreCompleto = nombre,
                             area = areaSeleccionada,
                             puesto = puesto
@@ -142,7 +153,11 @@ fun PantallaEditarEmpleado(
                         Toast.makeText(context, "Empleado reasignado a: $areaSeleccionada", Toast.LENGTH_SHORT).show()
                         onVolver()
                     },
-                    modifier = Modifier.fillMaxWidth().padding(top = 16.dp)
+                    modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF3B82F6),
+                        contentColor = Color.Black
+                    )
                 ) {
                     Text("Guardar Cambios")
                 }

@@ -153,7 +153,7 @@ fun PantallaRegistro(
             Text(text = "Crear cuenta")
         }
 
-        Spacer(modifier = Modifier.height(250.dp))
+
 
         TextButton(
             onClick = onRegresar,

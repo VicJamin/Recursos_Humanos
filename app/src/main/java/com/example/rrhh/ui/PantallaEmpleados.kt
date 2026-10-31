@@ -23,7 +23,7 @@ fun PantallaEmpleados(
 ) {
     val listaEmpleados by viewModel.empleados.collectAsState(initial = emptyList())
     val areaActual by viewModel.areaSeleccionada.collectAsState()
-    val areas = listOf("Todos", "Servicios Generales", "Agentes del CAM", "Administración")
+    val areas = listOf("Todos", "Servicios Generales", "Agentes del CAM", "Administracion", "Catastro")
 
     Scaffold(
         containerColor = Color(0xFFF4F6F9),

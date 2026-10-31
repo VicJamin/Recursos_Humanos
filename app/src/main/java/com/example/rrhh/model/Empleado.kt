@@ -7,10 +7,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "empleados")
 data class Empleado(
-    @PrimaryKey val idEmpleado: String, // ID personalizado
+    @PrimaryKey val idEmpleado: String,
     val nombreCompleto: String,
-    val area: String,                   // ej: "Servicios Generales", "CAM"
+    val area: String,
     val puesto: String,
-    val horasConGoceDisp: Int = 40,     // Límite 40 horas
-    val horasSinGoceDisp: Int = 480     // Límite 480 horas
+    val horasConGoceDisp: Int = 40,
+    val horasSinGoceDisp: Int = 480
 )

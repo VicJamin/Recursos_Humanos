@@ -12,7 +12,8 @@ import kotlinx.coroutines.launch
 class PermisoViewModel(private val repository: PermisoRepository) : ViewModel() {
 
     val listaPermisos: StateFlow<List<Permiso>> = repository.obtenerPermisos()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(
+            5000), emptyList())
 
     fun registrarPermiso(permiso: Permiso, onResultado: (Boolean) -> Unit) {
         viewModelScope.launch {

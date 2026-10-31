@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rrhh.data.EmpleadoRepository
 import com.example.rrhh.model.Empleado
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
@@ -20,6 +21,10 @@ class EmpleadoViewModel(private val repository: EmpleadoRepository) : ViewModel(
 
     fun cambiarArea(nuevaArea: String) {
         _areaSeleccionada.value = nuevaArea
+    }
+
+    fun obtenerEmpleadoPorIdFlow(id: String): Flow<Empleado?> {
+        return repository.obtenerEmpleadoPorIdFlow(id)
     }
 
     fun guardarEmpleado(empleado: Empleado) {
